@@ -7,12 +7,12 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace services.tests
+namespace services.tests.scenarios
 {
     [TestCaseOrderer("core.tests.PriorityOrderer", "core.tests")]
-    public class PlanejamentoSafraTests
+    public class EmployeeServiceTest
     {
-        readonly Employee employee = new Employee
+        private readonly Employee employee = new Employee
         {
             Id = Guid.NewGuid(),
             Name = "New Employee"

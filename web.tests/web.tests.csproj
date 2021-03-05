@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\core.tests\core.tests.csproj" />
+    <ProjectReference Include="..\web\web.csproj" />
   </ItemGroup>
 
 </Project>
