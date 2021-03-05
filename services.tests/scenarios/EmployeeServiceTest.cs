@@ -19,7 +19,7 @@ namespace services.tests.scenarios
         };
 
 
-        [Fact, TestPriority(0)]
+        [Fact, TestPriority(1)]
         public void TEST_MOCK_REPOSITORY_INSERT()
         {
             var options = new DbContextOptionsBuilder<EFAppContext>()
@@ -41,7 +41,7 @@ namespace services.tests.scenarios
             }
         }
 
-        [Fact, TestPriority(1)]
+        [Fact, TestPriority(2)]
         public void TEST_MOCK_REPOSITORY_GETALL()
         {
             var options = new DbContextOptionsBuilder<EFAppContext>()
@@ -57,7 +57,7 @@ namespace services.tests.scenarios
 
 
 
-        [Fact, TestPriority(2)]
+        [Fact, TestPriority(3)]
         public void TEST_MOCK_REPOSITORY_UPDATE()
         {
             var options = new DbContextOptionsBuilder<EFAppContext>()
@@ -67,7 +67,7 @@ namespace services.tests.scenarios
             using (var context = new EFAppContext(options))
             {
                 var service = new EFRepository<Employee>(context);
-                var result = service.GetById(employee.Id);
+                var result = service.GetAll().FirstOrDefault();
 
                 result.UpdatedAt = DateTime.Today;
                 service.Update(result);
@@ -77,7 +77,7 @@ namespace services.tests.scenarios
             }
         }
 
-        [Fact, TestPriority(3)]
+        [Fact, TestPriority(4)]
         public void TEST_MOCK_REPOSITORY_DELETE()
         {
             var options = new DbContextOptionsBuilder<EFAppContext>()
@@ -88,7 +88,7 @@ namespace services.tests.scenarios
             {
                 var service = new EFRepository<Employee>(context);
 
-                var item = service.GetById(employee.Id); ;
+                var item = service.GetAll().FirstOrDefault();
 
                 service.DeleteRange(employee => employee.Id == item.Id);
                 context.SaveChanges();

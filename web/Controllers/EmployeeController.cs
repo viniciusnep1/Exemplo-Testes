@@ -29,5 +29,16 @@ namespace web.Controllers
             var response = await mediator.Send(command);
             return await Task.FromResult(Ok(response));
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] CreateEmployeeCommand command)
+        {
+            if (command == null)
+                return await Task.FromResult(BadRequest("Command id null"));
+
+            var response = await mediator.Send(command);
+            return await Task.FromResult(Ok(response));
+        }
     }
 }

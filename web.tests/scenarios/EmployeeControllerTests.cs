@@ -33,7 +33,8 @@ namespace web.tests.scenarios
                 Url = "/api/Employee",
                 Body = new
                 {
-                    employee
+                    Id = employee.Id,
+                    Name = employee.Name
                 }
             };
             var response = await Client.PostAsync(postRequest.Url, ContentHelper.GetStringContent(postRequest.Body));
@@ -42,9 +43,9 @@ namespace web.tests.scenarios
         }
 
         [Fact, TestPriority(2)]
-        public async Task ReturnOkResponseGetById()
+        public async Task ReturnOkResponseGetAll()
         {
-            var response = await Client.GetAsync($"/api/Employee/{employee.Id}");
+            var response = await Client.GetAsync($"/api/Employee");
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }

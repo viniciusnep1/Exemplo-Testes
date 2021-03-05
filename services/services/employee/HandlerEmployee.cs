@@ -25,7 +25,21 @@ namespace services.services.employee
 
         public async Task<Response> Handle(ReadEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employees = repository.GetAll(x => x.Active && !x.DeletedAt.HasValue);
+            // Way to get all entities
+            //var employees = repository.GetAll(x => x.Active && !x.DeletedAt.HasValue);
+
+
+            var employees = new List<Employee>();
+
+            employees.Add(new Employee
+            {
+                Name = "Employee 1",
+            });
+
+            employees.Add(new Employee
+            {
+                Name = "Employee 2",
+            });
 
             return await Task.FromResult(new Response(employees));
         }
@@ -38,8 +52,9 @@ namespace services.services.employee
                 Description = request.Description
             };
 
-            await repository.Create(employee);
-            await repository.SaveChanges();
+            // Way to create an entity
+            //await repository.Create(employee);
+            //await repository.SaveChanges();
 
             return await Task.FromResult(new Response(employee));
         }
@@ -47,12 +62,13 @@ namespace services.services.employee
         public async Task<Response> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
             var employee = repository.GetById(request.Id);
-            
+
             employee.Name = request.Name;
             employee.Description = request.Description;
 
-            repository.Update(employee);
-            await repository.SaveChanges();
+            // Way to update an entity
+            //repository.Update(employee);
+            //await repository.SaveChanges();
 
             return await Task.FromResult(new Response(employee));
         }
@@ -60,11 +76,11 @@ namespace services.services.employee
         public async Task<Response> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
         {
             var employee = repository.GetById(request.Id);
-            
-            repository.Delete(employee);
-            
-            await repository.SaveChanges();
-            
+
+            // Way to delete an entity
+            //repository.Delete(employee);
+            //await repository.SaveChanges();
+
             return await Task.FromResult(new Response(employee));
         }
     }
